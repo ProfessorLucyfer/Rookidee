@@ -1,6 +1,6 @@
-import nextcord
-intents = nextcord.Intents.all()
-from nextcord.ext import commands
+import discord
+intents = discord.Intents.all()
+from discord.ext import commands
 import json
 
 def get_prefix(client, message):
@@ -10,16 +10,16 @@ def get_prefix(client, message):
     return guild_dict["prefix"]
 
 def ext_modules_open():
-    with open('C:/Users/baske/Documents/Rookidee/main/data/ext_modules.json') as f:
+    with open('data/ext_modules.json') as f:
         modules = json.load(f)
         return modules
         
 def ext_modules_write(data):
-    with open('C:/Users/baske/Documents/Rookidee/main/data/ext_modules.json') as f:
+    with open('data/ext_modules.json') as f:
         json.dump(data, f)
 
-TOKEN = open("'C:/Users/baske/Documents/Rookidee/main/data/token.txt", "r").readline()
-prefix_path = 'C:/Users/baske/Documents/Rookidee/main/data/settings.json'
+TOKEN = open("data/token.txt", "r").readline()
+prefix_path = 'data/settings.json'
 client = commands.Bot(
     command_prefix = (get_prefix),
     intents = intents)
@@ -48,7 +48,6 @@ async def on_ready():
             print(f"Could not load module {i}")
             print(f"{i} {error}")
             not_loaded_modules.append(i)
-    client.load_extension('pettting')
     
     print("Loaded modules: "+ ', '.join(i for i in loaded_modules))
     print("Modules not loaded: "+ ', '.join(i for i in not_loaded_modules))
