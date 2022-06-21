@@ -2,7 +2,7 @@ from discord.ext import commands
 from discord.ext.commands import Cog
 import json, discord
 
-settings = 'main/data/settings.json'
+settings = 'data/settings.json'
 standard_prefix = "."
 
 def json_open(path):

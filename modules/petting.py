@@ -6,8 +6,8 @@ from discord.ext.commands.cooldowns import BucketType
 from .server_settings import json_write, json_open
 
 
-pet_count_path = 'main/data/pet_count.json'
-settings = 'main/data/settings.json'
+pet_count_path = 'data/pet_count.json'
+settings = 'data/settings.json'
 
 class petting(commands.Cog):
     def __init__(self, client):
