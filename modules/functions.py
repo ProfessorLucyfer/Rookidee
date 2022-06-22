@@ -71,35 +71,6 @@ class functions(commands.Cog):
         text = ", ".join(result)
         await ctx.send("**Result**\n" + f"{text}")
 
-    @Cog.listener("on_raw_reaction_add")
-    async def reaction_pinning_add(self, payload):
-        if payload.emoji.name == "📌":
-            pin_channel = self.client.get_channel(payload.channel_id)
-            pin_msg = payload.message_id
-            pin_msg = await pin_channel.fetch_message(payload.message_id)
-            # pin_msg_user = [pin_msg.author.id]
-            # pin_reactor = discord.utils.find(lambda m : m.id == payload.user_id, pin_guild.members)
-            # pin_reactor_id = int(pin_reactor.id)
-            # valid_users = pin_msg_user + admin_users_id
-            # valid_users_test = all(user != pin_reactor_id for user in valid_users)
-            # if valid_users_test == False:
-            await pin_msg.pin()
-    
-    
-    @Cog.listener("on_raw_reaction_remove")
-    async def reaction_pinning_remove(self, payload):
-        if payload.emoji.name == "📌": 
-            pin_channel = self.client.get_channel(payload.channel_id)
-            pin_msg = payload.message_id
-            pin_msg = await pin_channel.fetch_message(payload.message_id)
-            # pin_msg_user = [pin_msg.author.id]
-            # pin_reactor = discord.utils.find(lambda m : m.id == payload.user_id, pin_guild.members)
-            # pin_reactor_id = int(pin_reactor.id)
-            # valid_users = pin_msg_user + admin_users_id
-            # valid_users_test = all(user != pin_reactor_id for user in valid_users)
-            # if valid_users_test == False: # use this if you want only message author and admins to be able to unpin
-            await pin_msg.unpin()
-
 
 def setup(client):
     client.add_cog(functions(client))

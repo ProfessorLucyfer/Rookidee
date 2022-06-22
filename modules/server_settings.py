@@ -23,7 +23,7 @@ class server_settings(commands.Cog):
 
     @commands.command(hidden=True)
     @commands.has_permissions(administrator=True)
-    async def ferro_say(self, ctx, channel:discord.TextChannel, *, msg:str):
+    async def rooki_say(self, ctx, channel:discord.TextChannel, *, msg:str):
         try:
             await channel.send(msg)
         except:
@@ -38,7 +38,7 @@ class server_settings(commands.Cog):
 
     @commands.command(hidden=True)
     @commands.has_permissions(administrator=True)
-    async def ferro_react(self, ctx, msg:discord.Message,*, reactions):
+    async def rooki_react(self, ctx, msg:discord.Message,*, reactions):
         reactions_list = reactions.split(" ")
         print(reactions_list)
         for i in reactions_list:
@@ -51,26 +51,6 @@ class server_settings(commands.Cog):
 
 
     #### Prefix settings
-    @Cog.listener("on_message")
-    @commands.has_permissions(administrator=True)
-    async def reset_prefix(self, message):
-        """Reset the server prefix, will work no matter what prefix is set"""
-        if message.author == self.client.user:
-            return
-        if message.guild == None:
-            await message.author.send("Hi, I do not have any commands for use in DM")
-            return
-
-        if message.author.guild_permissions.administrator == True and message.content == "fb!reset":
-            data = json_open(settings)
-            guild_dict = data[str(message.guild.id)]
-            guild_dict["prefix"] = standard_prefix
-            data[str(message.guild.id)] = guild_dict
-            json_write(settings, data)
-            await message.channel.send("Prefix has been reset to fb!. To change it, use fb!change_prefix")
-
-
-
     @Cog.listener("on_message")
     async def pingForPrefix(self, message):
         """Ping ferro to see prefix"""
