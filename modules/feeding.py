@@ -56,7 +56,8 @@ class feeding(commands.Cog):
             
         if self.feedMax <= self.feedCurrent:
             await ctx.send("The max feed was set to lower than current feed, resetting current values")
-            await self.feedReset(ctx)
+            self.feedCurrent = 0
+            self.isOverfed = False
         
 
     @commands.command()
@@ -66,8 +67,9 @@ class feeding(commands.Cog):
             if self.feedCurrent == self.feedMax:
                 await self.sendFoodComaEmbed(ctx)
                 self.isOverfed = True
-                await asyncio.sleep(random.randint(120, 300))
-                await self.feedReset(ctx)
+                await asyncio.sleep(random.randint(120, 300)) 
+                if self.isOverfed == True:
+                    await self.feedReset(ctx)
             else:
                 await self.sendFeedEmbed(ctx)
         else:
