@@ -119,5 +119,4 @@ async def extension(ctx, task:str=None, module:str=None):
             print(f"Unable to reload {module}\nError: {error}")
             await ctx.send(f"Unable to reload {module}\nError: {error}")
 
-    
 client.run(TOKEN)
