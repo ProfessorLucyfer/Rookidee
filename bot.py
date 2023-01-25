@@ -67,6 +67,10 @@ async def stop_game(ctx):
 async def set_watching(ctx, w=None):
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=w))
 
+@client.command()
+@commands.is_owner()
+async def role_kick(ctx, role: discord.Role):
+    [await member.kick() for member in ctx.guild.members if role in member.roles]
 
 @client.command(hidden=True)
 @commands.is_owner()

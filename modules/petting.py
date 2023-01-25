@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord.ext.commands import Cog, CommandOnCooldown
 from discord.ext.commands.cooldowns import BucketType
 from .server_settings import json_write, json_open
+import random, re, sys
 
 
 pet_count_path = 'data/pet_count.json'
@@ -158,11 +159,36 @@ class petting(commands.Cog):
             allowed_mentions = discord.AllowedMentions(users=False)
             await ctx.send(f"{ctx.author.mention}! you have pet me **{pet}x** times, and have been hurt **{hurt}x** times.", allowed_mentions=allowed_mentions)
 
-    @commands.command()
-    async def birbpet(self, ctx):
-        """To pet the mint birb"""
-        await ctx.send("<a:PetTheBirb:754269160598536214>")
+    @commands.command(pass_context=True, name = 'bonk', aliases=['unfeed', 'boop'])
+    async def bonk(self, ctx):
+        id = ctx.message.author.id
+        embed = discord.Embed(
+        colour = discord.Colour.red())
+        embed.add_field(name='You have been attacked!', value="<@"+str(id)+"> was viciously attacked by Rookidee!")
+        await ctx.send(embed=embed)
 
+    @commands.command(pass_context=True)
+    async def dance(self, ctx):
+        choice = [1,2,3,4,5,6,7,8,9,10]
+        selection = random.choice(choice)
+        if selection <= 7:
+            embed = discord.Embed(
+            colour = discord.Colour.green())
+            embed.add_field(name='Rookidee used Feather Dance!', value="Rookidee lowered your attack greatly! \n" 
+                                                                            "\n Rookidee enjoyed his dance!")
+            await ctx.send(embed=embed)
+        elif 8<= selection <= 9:
+            embed = discord.Embed(
+            colour = discord.Colour.green())
+            embed.add_field(name='Rookidee used... Swords Dance?!', value="Rookidee's Attack was raised greatly! \n" 
+                                                                            "\n Rookidee enjoyed his dance!")
+            await ctx.send(embed=embed)
+        elif selection >= 10:
+            embed = discord.Embed(
+            colour = discord.Colour.green())
+            embed.add_field(name='Rookidee used... Dragon Dance?!', value="Rookidee's Attack and Speed were raised! \n" 
+                                                                            "\n Rookidee enjoyed his dance!")
+            await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(petting(client))  
