@@ -42,7 +42,7 @@ async def on_ready():
     modules = ext_modules_open()
     for i in modules:
         try:
-            client.load_extension('modules.'+i)
+            await client.load_extension('modules.'+i)
             loaded_modules.append(i)
         except Exception as error:
             print(f"Could not load module {i}")

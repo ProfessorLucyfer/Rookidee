@@ -72,5 +72,5 @@ class functions(commands.Cog):
         await ctx.send("**Result**\n" + f"{text}")
 
 
-def setup(client):
-    client.add_cog(functions(client))
+async def setup(client):
+    await client.add_cog(functions(client))

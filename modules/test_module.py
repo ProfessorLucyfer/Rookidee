@@ -10,5 +10,5 @@ class test_module(commands.Cog):
     async def ping(self, ctx):
         await ctx.send(f"Command registered, latency: {str(round(self.client.latency, 4))}")
         
-def setup(client):
-    client.add_cog(test_module(client))
+async def setup(client):
+    await client.add_cog(test_module(client))

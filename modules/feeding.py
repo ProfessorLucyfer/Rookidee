@@ -76,6 +76,6 @@ class feeding(commands.Cog):
         else:
             await self.sendFoodComaEmbed(ctx)
 
-def setup(client):
-    client.add_cog(feeding(client))
+async def setup(client):
+    await client.add_cog(feeding(client))
 
